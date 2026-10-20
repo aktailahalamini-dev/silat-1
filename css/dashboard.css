@@ -1,0 +1,41 @@
+/* dashboard.css — halaman utama, pilihan peran arena, dan login */
+.page { max-width: 1000px; margin: 0 auto; padding: 28px 18px 8px; min-height: 100vh; display: flex; flex-direction: column; }
+.page .site-foot { margin-top: auto; }
+.brand { text-align: center; }
+.logo-row { display: flex; justify-content: center; align-items: center; gap: 18px; margin-bottom: 14px; }
+.brand h1, .login-card h1 { margin: 6px 0 2px; font: 800 clamp(1.4rem, 4.2vw, 2.4rem) var(--font-num); letter-spacing: .03em; color: var(--gold-2); }
+.sub { margin: 0; letter-spacing: .25em; color: var(--muted); font-size: .9rem; }
+.arena-title { font: 800 clamp(1.8rem, 6vw, 3rem) var(--font-num); margin: 18px 0 0; }
+.arena-choice, .role-choice { display: grid; gap: 22px; margin: 38px 0 28px; }
+.arena-choice { grid-template-columns: repeat(2, 1fr); }
+.role-choice { grid-template-columns: repeat(3, 1fr); }
+.arena-card, .role-card {
+  position: relative; overflow: hidden; display: block; text-decoration: none; color: var(--text); text-align: center;
+  background: linear-gradient(180deg, rgba(18, 30, 63, .9), rgba(10, 18, 38, .92));
+  border: 2px solid var(--line); border-top: 5px solid var(--gold); border-radius: 24px; padding: 34px 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, .4); transition: transform .15s, border-color .15s;
+}
+.arena-card:hover, .role-card:hover { transform: translateY(-4px); border-color: var(--gold-2); }
+.arena-card h2, .role-card h2 { margin: 0 0 8px; font: 800 clamp(1.6rem, 4vw, 2.3rem) var(--font-num); position: relative; }
+.arena-card p, .role-card p { margin: 0; color: var(--muted); position: relative; }
+.ghost-num { position: absolute; right: 14px; top: -22px; font: 900 11rem var(--font-num); color: rgba(212, 167, 44, .08); line-height: 1; }
+.chip-st { display: inline-block; margin-top: 16px; padding: 4px 12px; border-radius: 99px; font-size: .8rem; background: rgba(154, 166, 194, .16); position: relative; }
+.chip-st[data-st="berlangsung"] { background: rgba(47, 179, 107, .22); color: #8cf0b9; }
+.chip-st[data-st="dijeda"], .chip-st[data-st="waktu-habis"] { background: rgba(230, 167, 0, .22); color: #ffd36b; }
+.role-card { padding: 26px 16px; } .role-card small { display: block; margin-top: 12px; color: var(--gold); }
+.role-card.live { border-top-color: var(--red); }
+.slogan { text-align: center; font-size: 1.1rem; margin: 6px 0; }
+.back { text-align: center; }
+.login-page { justify-content: center; align-items: center; }
+.login-card { width: min(420px, 100%); text-align: center; background: rgba(10, 18, 38, .92); border: 2px solid var(--line); border-radius: 24px; padding: 28px 24px; }
+.login-for { margin: 14px 0 6px; font-weight: 700; }
+.login-card form { text-align: left; display: grid; gap: 12px; }
+.demo-note { font-size: .82rem; color: var(--muted); margin-top: 14px; }
+@media (max-width: 720px) { .arena-choice, .role-choice { grid-template-columns: 1fr; gap: 14px; margin: 24px 0; } .ghost-num { font-size: 8rem; } }
+
+/* dasbor utama Fight / Seni */
+.slogan.ar { font-size: 1.5rem; color: var(--gold-2); margin-top: 0; } .slogan.sm { font-size: .95rem; color: var(--muted); }
+
+/* kartu Loting di pilih arena */
+.arena-card.lot { grid-column: 1 / -1; justify-self: center; width: min(50%, 440px); border-top-color: var(--red); } .lot-sm { display: block; margin-top: 12px; color: var(--gold); position: relative; }
+@media (max-width: 720px) { .arena-card.lot { width: 100%; } }

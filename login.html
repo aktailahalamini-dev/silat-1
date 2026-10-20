@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Login — ATSC IV</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/dashboard.css"><link rel="stylesheet" href="css/forms.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<main class="page login-page">
+  <div class="login-card">
+    <div class="logo-row">
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-left.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <span class="logo-slot big" data-label="M"><img src="assets/logos/event-logo.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-right.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+    </div>
+    <h1>ATSC IV</h1><p class="sub">TINGKAT PROVINSI ACEH</p>
+    <p class="login-for" id="loginFor"></p>
+    <form id="loginForm" autocomplete="off" novalidate>
+      <label class="field"><span>Username</span><input id="lu" type="text" required autofocus></label>
+      <label class="field"><span>Password</span><input id="lp" type="password" required></label>
+      <p class="err" id="lerr" hidden></p>
+      <button class="btn btn-primary big" type="submit">MASUK</button>
+    </form>
+    <p class="demo-note" id="demoNote"></p>
+    <p class="back"><a id="backLink" href="index.html">‹ Kembali</a></p>
+  </div>
+</main>
+<script src="js/auth-demo.js"></script><script src="js/app.js"></script>
+<script>
+  const q = new URLSearchParams(location.search), rp = q.get('role');
+  const role = rp === 'juri' ? 'juri' : rp === 'loting' ? 'loting' : 'dewan', mode = role === 'loting' ? 'fight' : UI.modeParam();
+  const n = role === 'loting' ? 0 : UI.arenaParam();
+  if (role !== 'loting' && !n) location.replace('index.html');
+  const seni = mode === 'seni', label = role === 'dewan' ? 'Dewan Pertandingan' : role === 'loting' ? 'Panitia Loting' : 'Juri';
+  UI.$('loginFor').textContent = role === 'loting' ? 'Login Panitia Loting' : `Login ${label} ${seni ? 'Seni' : 'Fight'} — Arena ${n}`;
+  UI.$('backLink').href = role === 'loting' ? 'pilih-arena.html?mode=fight' : 'arena.html?arena=' + n + '&mode=' + mode;
+  const pre = `a${n}${seni ? 'seni' : ''}`;
+  UI.$('demoNote').innerHTML = 'Contoh username: <b>' +
+    (role === 'loting' ? 'loting' : role === 'dewan' ? `${pre}dewan` : `${pre}juri1 … ${pre}juri4`) + '</b>. Sandi diatur di <code>js/auth-demo.js</code> (lihat README).';
+  UI.$('loginForm').addEventListener('submit', e => {
+    e.preventDefault();
+    const r = ATSC_AUTH.login(UI.$('lu').value, UI.$('lp').value, role, n, mode);
+    const er = UI.$('lerr');
+    if (!r.ok) { er.hidden = false; er.textContent = r.msg; return; }
+    if (role === 'loting') { location.href = 'loting.html'; return; }
+    const page = role === 'dewan' ? (seni ? 'dewan-seni.html' : 'dewan.html') : (seni ? 'judge-seni.html' : 'judge.html');
+    location.href = page + '?arena=' + r.session.arena;
+  });
+</script>
+</body>
+</html>

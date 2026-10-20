@@ -1,0 +1,85 @@
+/* forms.css — formulir, halaman Juri, dan dasbor Dewan */
+.field { display: grid; gap: 4px; margin: 0; } .field > span { font-size: .85rem; color: var(--muted); font-weight: 600; }
+input, select, textarea { font: 1rem var(--font); color: var(--text); background: #0d1730; border: 2px solid rgba(154, 166, 194, .4); border-radius: 10px; padding: 10px 12px; width: 100%; }
+input:focus, select:focus, textarea:focus { border-color: var(--gold); outline: none; }
+input:disabled, select:disabled, textarea:disabled { opacity: .55; }
+.field.chk { grid-auto-flow: column; justify-content: start; align-items: center; gap: 8px; } .field.chk input { width: auto; }
+.red-f input { border-left: 6px solid var(--red); } .blue-f input { border-left: 6px solid var(--blue); }
+.card { background: rgba(10, 18, 38, .9); border: 2px solid var(--line); border-radius: var(--radius); padding: 16px 18px; margin-bottom: 16px; }
+.card h2 { margin: 0 0 12px; font: 800 1.15rem var(--font-num); letter-spacing: .04em; } .card h2 small { color: var(--muted); font-weight: 600; }
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; margin-bottom: 14px; }
+.actions { display: flex; gap: 10px; justify-content: flex-end; flex-wrap: wrap; margin-top: 12px; }
+.err-list { color: #ff8a95; font-weight: 600; background: rgba(214, 40, 57, .1); border-radius: 10px; padding: 10px 10px 10px 30px; }
+fieldset { border: 0; padding: 0; margin: 0; } fieldset:disabled { opacity: .55; }
+.radios { display: flex; gap: 18px; flex-wrap: wrap; margin-bottom: 12px; } .radios label { display: flex; gap: 6px; align-items: center; font-weight: 600; } .radios input { width: auto; }
+
+/* ---- Dewan ---- */
+.dw-layout { display: grid; grid-template-columns: 210px 1fr; min-height: calc(100vh - 70px); }
+.dw-nav { display: flex; flex-direction: column; gap: 10px; padding: 16px 12px; border-right: 2px solid var(--gold); background: rgba(5, 8, 15, .6); }
+.dw-nav button { font: 700 .9rem var(--font-num); text-align: left; padding: 12px; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--text); cursor: pointer; }
+.dw-nav button.active { background: var(--gold); color: #1a1405; border-color: var(--gold); }
+.dw-main { padding: 16px; min-width: 0; }
+.mon-top { display: grid; grid-template-columns: 1fr 270px; gap: 16px; }
+.mon-row { display: grid; grid-template-columns: 1fr minmax(150px, .6fr) 1fr; gap: 12px; align-items: stretch; }
+.mon-side { border: 3px solid; border-radius: 14px; padding: 10px; display: grid; text-align: center; }
+.mon-side.red { border-color: var(--red); background: rgba(214, 40, 57, .1); } .mon-side.blue { border-color: var(--blue); background: rgba(31, 95, 214, .12); }
+.mon-side small { color: var(--muted); } .mon-side b { font-size: 1.2rem; overflow-wrap: anywhere; } .mon-side span { color: var(--muted); font-size: .9rem; }
+.mon-side .num { font: 900 4.2rem/1.1 var(--font-num); }
+.mon-mid { display: flex; flex-direction: column; justify-content: center; align-items: center; gap: 8px; text-align: center; }
+.mon-mid .timer { font-size: 2.8rem; } .mon-mid .status { font-size: .8rem; }
+.ctrl-card { display: flex; flex-direction: column; gap: 12px; }
+.round-list { display: grid; gap: 6px; }
+.round-opt { display: flex; gap: 10px; align-items: center; padding: 9px 12px; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--text); font: 600 1rem var(--font); cursor: pointer; }
+.round-opt small { margin-left: auto; color: var(--muted); } .round-opt .dot { width: 14px; height: 14px; border-radius: 50%; border: 2px solid var(--gold); }
+.round-opt.active { border-color: var(--gold); background: rgba(212, 167, 44, .14); } .round-opt.active .dot { background: var(--gold); }
+.round-opt:disabled { opacity: .55; cursor: not-allowed; }
+.judge-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 14px; }
+.jcard h3 { margin: 0 0 6px; font-family: var(--font-num); } .jcard h3 small { color: var(--muted); font-weight: 600; }
+.jcard table { width: 100%; border-collapse: collapse; margin: 8px 0; }
+.jcard th, .jcard td { padding: 3px 6px; text-align: center; border-bottom: 1px solid rgba(154, 166, 194, .2); } .jcard th:first-child { text-align: left; color: var(--muted); font-weight: 600; }
+th.r { color: #ff8a95; } th.b { color: #8fb4ff; }
+table.sum, table.list { width: 100%; border-collapse: collapse; } table.sum th, table.sum td, table.list td, table.list th { padding: 7px 8px; border-bottom: 1px solid rgba(154, 166, 194, .2); text-align: left; }
+.big-n { font: 900 2rem var(--font-num); text-align: right; } .big-n.r { color: #ff8a95; } .big-n.b { color: #8fb4ff; }
+table.list { font-size: .9rem; } th.r { text-align: left; }
+
+/* ---- Juri ---- */
+.j-wrap { max-width: 1200px; margin: 0 auto; padding: 12px; }
+.j-head { display: grid; grid-template-columns: 1fr 1.2fr 1fr; gap: 10px; margin-bottom: 10px; }
+.j-box, .j-mid { border: 2px solid var(--line); border-radius: 14px; background: rgba(10, 18, 38, .9); padding: 8px 12px; display: grid; text-align: center; align-content: center; }
+.j-box small { color: var(--muted); letter-spacing: .15em; } .j-box b { font: 800 2rem var(--font-num); } .j-box span { color: var(--muted); font-size: .85rem; }
+.j-mid b { font: 800 1.2rem var(--font-num); color: var(--gold-2); } .j-mid .timer { font-size: 2.6rem; line-height: 1.1; } .j-mid .status { font-size: .75rem; }
+.j-sides { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.jside { border: 3px solid; border-radius: 16px; padding: 10px; background: rgba(5, 8, 15, .7); }
+.jside.red { border-color: var(--red); } .jside.blue { border-color: var(--blue); }
+.jside h2 { margin: 0 0 8px; text-align: center; font: 800 1rem var(--font-num); letter-spacing: .08em; }
+.tech-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.tech { position: relative; }
+.tech-btn { width: 100%; min-height: 96px; border-radius: 16px; border: 3px solid; background: transparent; color: var(--text); display: grid; place-items: center; cursor: pointer; font-family: var(--font-num); touch-action: manipulation; }
+.jside.red .tech-btn { border-color: var(--red); } .jside.blue .tech-btn { border-color: var(--blue); }
+.jside.red .tech-btn:active:not(:disabled) { background: var(--red); } .jside.blue .tech-btn:active:not(:disabled) { background: var(--blue); }
+.tv { font-size: 2.2rem; font-weight: 900; line-height: 1; } .tc { font-size: 1.1rem; color: var(--muted); }
+.tech-undo { position: absolute; top: 6px; right: 6px; padding: 2px 8px; border-radius: 8px; border: 1px solid var(--line); background: rgba(5, 8, 15, .8); color: var(--muted); cursor: pointer; }
+button:disabled.tech-btn, .jside button:disabled { opacity: .4; cursor: not-allowed; }
+.pen-controls { display: flex; flex-wrap: wrap; gap: 10px 16px; margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--line); align-items: flex-start; }
+.jside .bn { display: grid; gap: 6px; } .jside .hk { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; } .jside .hk i { grid-column: 1 / -1; font-style: normal; text-align: center; color: var(--muted); font-size: .8rem; }
+.jside .pill { font: 700 1rem var(--font-num); padding: 9px 10px; min-width: 52px; border-radius: 10px; border: 2px solid rgba(154, 166, 194, .45); background: transparent; color: var(--text); cursor: pointer; }
+.jside.red .pill.on { background: var(--red); border-color: #ff8a95; } .jside.blue .pill.on { background: var(--blue); border-color: #8fb4ff; }
+.steps { display: grid; gap: 6px; } .step { display: flex; gap: 8px; align-items: center; } .step span { width: 82px; font-size: .85rem; color: var(--muted); }
+.step button { width: 38px; height: 38px; border-radius: 10px; border: 2px solid var(--line); background: transparent; color: var(--text); font-size: 1.2rem; cursor: pointer; } .step b { min-width: 1.4em; text-align: center; }
+.side-sum { width: 100%; text-align: right; color: var(--muted); } .side-sum b { color: var(--text); font-size: 1.4rem; }
+.j-send { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 14px; padding: 12px 14px; border: 2px solid var(--gold); border-radius: 14px; background: rgba(10, 18, 38, .95); position: sticky; bottom: 8px; }
+.sub-lbl { color: var(--muted); margin-left: 8px; }
+@media (max-width: 860px) {
+  .dw-layout { grid-template-columns: 1fr; } .dw-nav { flex-direction: row; flex-wrap: wrap; border-right: 0; border-bottom: 2px solid var(--gold); }
+  .mon-top { grid-template-columns: 1fr; } .mon-row { grid-template-columns: 1fr 1fr; } .mon-mid { grid-column: 1 / -1; grid-row: 1; }
+  .j-sides { grid-template-columns: 1fr; } .j-head { grid-template-columns: 1fr 1fr; } .j-mid { grid-column: 1 / -1; grid-row: 1; }
+}
+
+/* ---- Remot juri (sesuai gambar remot): 4 tombol nilai + T1 T2 P1 P2 ---- */
+.tech-btn { min-height: 120px; gap: 0; align-content: center; }
+.tech-btn .tl { font: 600 1.05rem var(--font); color: var(--muted); }
+.tech-btn .tv { font-size: 3rem; }
+.pen-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-top: 12px; padding-top: 10px; border-top: 2px solid var(--line); }
+.pen-btn { min-height: 62px; border-radius: 14px; border: 3px solid rgba(154, 166, 194, .5); background: transparent; color: var(--text); font: 900 1.6rem var(--font-num); cursor: pointer; touch-action: manipulation; }
+.jside.red .pen-btn.on { background: var(--red); border-color: #ff8a95; } .jside.blue .pen-btn.on { background: var(--blue); border-color: #8fb4ff; }
+.pen-btn:disabled { opacity: .4; cursor: not-allowed; }

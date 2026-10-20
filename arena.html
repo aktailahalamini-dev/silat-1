@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arena — ATSC IV</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<main class="page home">
+  <header class="brand">
+    <div class="logo-row">
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-left.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <span class="logo-slot big" data-label="M"><img src="assets/logos/event-logo.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-right.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+    </div>
+    <h1>AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</h1>
+    <p class="sub">TINGKAT PROVINSI ACEH</p>
+    <p class="arena-title" id="arenaTitle">ARENA</p>
+  </header>
+  <section class="role-choice">
+    <a class="role-card" id="goDewan" href="#"><h2>DEWAN</h2><p>Mengatur / memantau pertandingan</p><small>Perlu login</small></a>
+    <a class="role-card live" id="goLive" href="#"><h2>LIVE SCORE</h2><p>Papan skor yang ditampilkan</p><small>Terbuka untuk umum</small></a>
+    <a class="role-card" id="goJuri" href="#"><h2>JURI</h2><p>Menilai pertandingan, Juri 1, 2, 3, 4</p><small>Perlu login</small></a>
+  </section>
+  <p class="slogan">Menjunjung Tinggi Sportivitas, Integritas, dan Prestasi.</p>
+  <p class="back"><a id="backLnk" href="index.html">‹ Kembali ke pilihan arena</a></p>
+  <footer class="site-foot">© 2026 AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</footer>
+</main>
+<script src="js/app.js"></script>
+<script>
+  const n = UI.arenaParam(), mode = UI.modeParam();
+  if (!n) location.replace('index.html');
+  const seni = mode === 'seni', label = seni ? 'SENI' : 'FIGHT';
+  document.title = label + ' Arena ' + n + ' — ATSC IV';
+  UI.$('arenaTitle').textContent = label + ' · ARENA ' + n;
+  UI.$('goDewan').href = (seni ? 'dewan-seni.html' : 'dewan.html') + '?arena=' + n;
+  UI.$('goLive').href = (seni ? 'live-score-seni.html' : 'live-score.html') + '?arena=' + n;
+  UI.$('goJuri').href = (seni ? 'judge-seni.html' : 'judge.html') + '?arena=' + n;
+  UI.$('backLnk').href = 'pilih-arena.html?mode=' + mode;
+</script>
+</body>
+</html>

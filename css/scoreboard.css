@@ -1,0 +1,57 @@
+/* scoreboard.css — Live Score untuk layar besar/TV */
+/* LATAR ARENA OPSIONAL: assets/backgrounds/arena-background.png */
+.arena-bg { position: fixed; inset: 0; z-index: 0; background: url("../assets/backgrounds/arena-background.png") center / cover no-repeat; opacity: .14; pointer-events: none; }
+.sb { min-height: 100vh; display: grid; grid-template-rows: auto 1fr auto auto; padding: 10px 14px; gap: 10px; }
+.sb-head { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 2px solid var(--gold); padding-bottom: 8px; }
+.sb-title { text-align: center; display: grid; line-height: 1.2; }
+.sb-title strong { font: 800 clamp(1rem, 2.6vw, 2rem) var(--font-num); letter-spacing: .03em; }
+.sb-title span { color: var(--muted); letter-spacing: .2em; font-size: clamp(.7rem, 1.4vw, 1rem); }
+.sb-title em { font-style: normal; color: var(--gold-2); font-weight: 700; margin-top: 2px; }
+.sb-main { display: grid; grid-template-columns: 1fr minmax(240px, .55fr) 1fr; gap: 14px; min-height: 0; }
+.side { display: flex; flex-direction: column; border-radius: 20px; overflow: hidden; border: 3px solid; background: rgba(5, 8, 15, .78); }
+.side.red { border-color: var(--red); } .side.blue { border-color: var(--blue); }
+.side h2 { margin: 0; text-align: center; padding: 8px; font: 800 clamp(1.1rem, 2.4vw, 1.9rem) var(--font-num); letter-spacing: .06em; }
+.side.red h2 { background: var(--red); } .side.blue h2 { background: var(--blue); }
+.ident { text-align: center; padding: 10px 8px 0; display: grid; }
+.ident b { font: 800 clamp(1.3rem, 3.2vw, 2.8rem) var(--font-num); overflow-wrap: anywhere; }
+.ident span { color: var(--muted); font-size: clamp(.9rem, 1.6vw, 1.4rem); }
+.big { flex: 1; display: grid; place-items: center; font: 900 clamp(7rem, 24vw, 22rem)/1 var(--font-num); font-variant-numeric: tabular-nums; }
+.side.red .big { text-shadow: 0 0 40px rgba(214, 40, 57, .55); } .side.blue .big { text-shadow: 0 0 40px rgba(31, 95, 214, .6); }
+.pen { display: grid; grid-template-columns: auto 1fr 1fr; gap: 8px 14px; align-items: center; padding: 10px 12px; border-top: 2px solid var(--line); }
+.bn { display: grid; gap: 6px; } .hk { display: flex; flex-wrap: wrap; gap: 5px; align-items: center; }
+.hk i { font-style: normal; width: 100%; text-align: center; color: var(--muted); font-size: .8rem; }
+.pill { display: inline-block; min-width: 2.6em; text-align: center; padding: 5px 7px; border-radius: 8px; border: 2px solid rgba(154, 166, 194, .35); color: var(--muted); font: 700 clamp(.8rem, 1.5vw, 1.2rem) var(--font-num); background: transparent; }
+.side.red .pill.on { background: var(--red); border-color: #ff8a95; color: #fff; } .side.blue .pill.on { background: var(--blue); border-color: #8fb4ff; color: #fff; }
+.tp { grid-column: 1 / -1; display: flex; justify-content: space-around; color: var(--muted); font-size: clamp(.85rem, 1.5vw, 1.2rem); }
+.tp b { color: var(--text); font-size: 1.2em; }
+.center { display: flex; flex-direction: column; align-items: center; gap: 12px; padding: 14px 10px; border: 2px solid var(--line); border-radius: 20px; background: rgba(10, 18, 38, .8); }
+.partai { font: 800 clamp(1.3rem, 3vw, 2.4rem) var(--font-num); border-bottom: 2px dashed var(--gold); padding-bottom: 6px; } .partai b { color: var(--gold-2); }
+.center .chip { font-size: clamp(.9rem, 1.6vw, 1.3rem); text-align: center; } .kelas { color: var(--muted); text-align: center; }
+.center .timer { margin: auto 0; font-size: clamp(3.4rem, 9vw, 8rem); line-height: 1; }
+.timer.low { color: #ff8a95; } .timer.paused { color: var(--warn); }
+.center .status { font-size: clamp(.85rem, 1.5vw, 1.2rem); width: 100%; }
+.winner { text-align: center; padding: 14px; border-radius: 20px; border: 3px solid var(--gold); background: rgba(10, 18, 38, .95); }
+.winner.red { background: linear-gradient(90deg, var(--red-d), var(--red)); border-color: #ff8a95; }
+.winner.blue { background: linear-gradient(90deg, var(--blue-d), var(--blue)); border-color: #8fb4ff; }
+.w-title { letter-spacing: .25em; font-weight: 700; font-size: clamp(.9rem, 2vw, 1.5rem); }
+.w-name { font: 900 clamp(1.5rem, 5vw, 4rem) var(--font-num); animation: pop .5s ease-out; } .w-sub { opacity: .9; }
+@keyframes pop { from { transform: scale(.9); opacity: 0; } to { transform: none; opacity: 1; } }
+.sb-foot { display: flex; align-items: center; gap: 14px; justify-content: space-between; color: var(--muted); font-size: .9rem; flex-wrap: wrap; }
+.sb-foot .btn { padding: 4px 12px; }
+@media (max-width: 900px) {
+  .sb-main { grid-template-columns: 1fr 1fr; } .center { grid-column: 1 / -1; grid-row: 1; } .big { font-size: clamp(5rem, 28vw, 9rem); }
+  .pen { grid-template-columns: auto 1fr; } .pen .hk:nth-of-type(2) { grid-column: 2; }
+}
+@media (max-width: 520px) { .sb-main { grid-template-columns: 1fr; } }
+
+/* Maskot di panel tengah papan skor (sesuai sketsa "background maskot") */
+.center { position: relative; overflow: hidden; }
+.center::before { content: ""; position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: .13;
+  background: url("../assets/backgrounds/mascot.png") center bottom / contain no-repeat; }
+.center > * { position: relative; z-index: 1; }
+/* Di papan skor, maskot besar halaman disembunyikan agar skor tetap bersih */
+.sb-page::after { display: none; }
+
+/* Baris T1 T2 P1 P2 di papan skor */
+.pen { display: flex; justify-content: space-around; gap: 10px; }
+.pen .pill { font-size: clamp(1rem, 2.2vw, 1.8rem); padding: 8px 14px; min-width: 3em; }

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Live Score — ATSC IV</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/scoreboard.css">
+    <link rel="stylesheet" href="css/theme.css">
+</head>
+
+<body class="sb-page">
+    <!-- LATAR ARENA OPSIONAL: assets/backgrounds/arena-background.png (lihat css/scoreboard.css) -->
+    <div class="arena-bg" aria-hidden="true"></div>
+    <div class="sb">
+        <header class="sb-head">
+            <span class="logo-slot" data-label="L"><img src="assets/logos/logo-left.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+            <div class="sb-title"><strong>AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</strong><span>TINGKAT PROVINSI ACEH</span><em id="arenaTag"></em></div>
+            <span class="logo-slot" data-label="L"><img src="assets/logos/logo-right.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+        </header>
+        <main class="sb-main">
+            <section class="side red" aria-label="Pesilat Merah">
+                <h2>PESILAT MERAH</h2>
+                <div class="ident"><b id="redName">—</b><span id="redKont"></span></div>
+                <div class="big" id="redScore">0</div>
+                <div class="pen" id="redPen"></div>
+            </section>
+            <section class="center">
+                <div class="partai">PARTAI <b id="partai">—</b></div>
+                <div class="chip" id="kategori">—</div>
+                <div class="kelas" id="kelas"></div>
+                <div class="chip babak" id="babak">BABAK</div>
+                <div class="timer" id="timer">00:00</div>
+                <div class="status" id="statusBar">BELUM ADA PARTAI</div>
+            </section>
+            <section class="side blue" aria-label="Pesilat Biru">
+                <h2>PESILAT BIRU</h2>
+                <div class="ident"><b id="blueName">—</b><span id="blueKont"></span></div>
+                <div class="big" id="blueScore">0</div>
+                <div class="pen" id="bluePen"></div>
+            </section>
+        </main>
+        <section class="winner" id="winner" hidden>
+            <div class="w-title" id="wTitle"></div>
+            <div class="w-name" id="wName"></div>
+            <div class="w-sub" id="wSub"></div>
+        </section>
+        <footer class="sb-foot"><span>Menjunjung Tinggi Sportivitas, Integritas, dan Prestasi.</span>
+            <a href="index.html">Menu</a><button class="btn btn-ghost" id="fsBtn" type="button">Layar penuh</button></footer>
+    </div>
+    <script src="js/arena-data.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/results.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/scoreboard.js"></script>
+    <script type="module">
+        // Import the functions you need from the SDKs you need import { initializeApp } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-app.js"; import { getAnalytics } from "https://www.gstatic.com/firebasejs/13.0.0/firebase-analytics.js"; // TODO:
+        Add SDKs for Firebase products that you want to use // https://firebase.google.com/docs/web/setup#available-libraries // Your web app's Firebase configuration // For Firebase JS SDK v7.20.0 and later, measurementId is optional const firebaseConfig
+        = { apiKey: "AIzaSyBV3nu918MZpylFtUtUf8Xp20aAXyvSmW0", authDomain: "ipsi-4fb7a.firebaseapp.com", projectId: "ipsi-4fb7a", storageBucket: "ipsi-4fb7a.firebasestorage.app", messagingSenderId: "137398899161", appId: "1:137398899161:web:0b147283c9f9ec958e09c8",
+        measurementId: "G-NHHDWG7LXN" }; // Initialize Firebase const app = initializeApp(firebaseConfig); const analytics = getAnalytics(app);
+    </script>
+</body>
+
+</html>

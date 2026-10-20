@@ -1,0 +1,26 @@
+/* bagan.css — bagan gugur & halaman loting */
+.bracket { display: flex; gap: 28px; align-items: stretch; overflow-x: auto; padding: 14px 4px 18px; }
+.b-col { display: flex; flex-direction: column; min-width: 210px; flex: none; }
+.b-col h4 { text-align: center; color: var(--gold-2); margin: 0 0 8px; font: 700 .85rem var(--font-num); letter-spacing: .08em; }
+.b-body { flex: 1; display: flex; flex-direction: column; justify-content: space-around; gap: 16px; }
+.b-match { position: relative; border: 2px solid var(--line); border-radius: 10px; background: rgba(10, 18, 38, .92); }
+.b-slot { display: grid; padding: 6px 10px; min-height: 46px; align-content: center; border-bottom: 1px solid rgba(154, 166, 194, .25); }
+.b-slot:last-child { border-bottom: 0; } .b-slot b { font-size: .92rem; overflow-wrap: anywhere; } .b-slot small { color: var(--muted); } .b-slot em { color: var(--muted); }
+.b-slot.win { background: rgba(47, 179, 107, .2); }
+.b-match .tag { position: absolute; right: 8px; top: -10px; background: var(--gold); color: #1a1405; font: 700 .7rem var(--font-num); padding: 1px 9px; border-radius: 99px; }
+.b-col.champ .b-match { border-color: var(--gold); border-width: 3px; }
+
+.lot-wrap { max-width: 1300px; margin: 0 auto; padding: 14px; }
+.lot-title { font: 800 1.3rem var(--font-num); letter-spacing: .05em; color: var(--gold-2); }
+.lot-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; } .lot-head h2 { margin: 0; }
+.lot-bar { display: flex; gap: 14px; align-items: end; flex-wrap: wrap; margin: 12px 0; } .field.grow { flex: 1; min-width: 240px; }
+.kat-btns, .lot-act { display: flex; gap: 8px; } .kat-btns .btn.active { background: var(--gold); color: #1a1405; }
+.lot-cfg { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; margin-bottom: 10px; font-size: .9rem; } .lot-cfg input, .lot-cfg select { width: 110px; padding: 6px 8px; }
+.lot-boxes { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+.lot-box { border: 2px solid var(--line); border-radius: 16px; padding: 10px 12px; min-height: 160px; background: rgba(5, 8, 15, .6); }
+.lot-box.on { border-color: var(--gold); box-shadow: 0 0 0 2px rgba(212, 167, 44, .25); }
+.lot-box h3 { margin: 0 0 8px; text-align: center; font: 800 1rem var(--font-num); } .lot-box h3 small { color: var(--muted); font-weight: 600; }
+.lot-box ol { margin: 0; padding-left: 22px; } .lot-box li { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 4px 0; border-bottom: 1px solid rgba(154, 166, 194, .15); }
+.lot-box li span { display: grid; } .lot-box li small { color: var(--muted); } .lot-box li .btn { padding: 2px 8px; }
+details.card summary { cursor: pointer; }
+@media (max-width: 800px) { .lot-boxes { grid-template-columns: 1fr; } }

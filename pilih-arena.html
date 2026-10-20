@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/dashboard.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body>
+<main class="page home">
+  <header class="brand">
+    <div class="logo-row">
+      <!-- LOGO KIRI: taruh file di assets/logos/logo-left.png -->
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-left.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <!-- LOGO UTAMA EVENT: assets/logos/event-logo.png -->
+      <span class="logo-slot big" data-label="M"><img src="assets/logos/event-logo.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+      <!-- LOGO KANAN: assets/logos/logo-right.png -->
+      <span class="logo-slot" data-label="L"><img src="assets/logos/logo-right.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+    </div>
+    <h1>AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</h1>
+    <p class="sub">TINGKAT PROVINSI ACEH</p>
+    <p class="arena-title" id="modeTitle"></p>
+  </header>
+  <section class="arena-choice" aria-label="Pilih arena">
+    <a class="arena-card" data-go="1" href="#"><span class="ghost-num" aria-hidden="true">1</span><h2>ARENA 1</h2>
+      <p>Arena pertandingan. Harap memasuki arena yang telah ditentukan.</p><span class="chip-st" data-arena-chip="1"></span></a>
+    <a class="arena-card" data-go="2" href="#"><span class="ghost-num" aria-hidden="true">2</span><h2>ARENA 2</h2>
+      <p>Arena pertandingan. Harap memasuki arena yang telah ditentukan.</p><span class="chip-st" data-arena-chip="2"></span></a>
+    <a class="arena-card lot" id="lotCard" href="loting.html" hidden><span class="ghost-num" aria-hidden="true">⇄</span><h2>LOTTING</h2><p>Tempat pembagian bagan untuk pertandingan.</p><small class="lot-sm">Perlu login panitia</small></a>
+  </section>
+  <p class="slogan">Dengan iman dan akhlak saya menjadi kuat,<br>tanpa Iman dan akhlak saya menjadi lemah</p>
+  <p class="slogan ar" lang="ar" dir="rtl">لا حول ولا قوة إلا بالله العلي العظيم</p>
+  <p class="back"><a href="index.html">‹ Kembali ke pilihan Fight / Seni</a></p>
+  <footer class="site-foot">© 2026 AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</footer>
+</main>
+<script src="js/arena-data.js"></script><script src="js/seni-data.js"></script><script src="js/app.js"></script>
+<script>
+  const mode = UI.modeParam();
+  UI.$('modeTitle').textContent = mode === 'seni' ? 'SENI — PILIH ARENA' : 'FIGHT — PILIH ARENA';
+  document.title = (mode === 'seni' ? 'Seni' : 'Fight') + ' — Pilih Arena';
+  document.querySelectorAll('[data-go]').forEach(a => { a.href = 'arena.html?arena=' + a.dataset.go + '&mode=' + mode; });
+  document.querySelectorAll('[data-arena-chip]').forEach(c => c.parentNode.dataset.mode = mode);
+  UI.$('lotCard').hidden = mode !== 'fight';
+</script>
+</body>
+</html>

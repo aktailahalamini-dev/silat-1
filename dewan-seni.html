@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dewan Seni — ATSC IV</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/forms.css"><link rel="stylesheet" href="css/seni.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body class="dewan-page">
+<header id="topbar" class="topbar"></header>
+<div class="dw-layout">
+  <nav class="dw-nav" aria-label="Menu Dewan Seni">
+    <button data-tab="monitor" class="active">MONITOR</button>
+    <button data-tab="data">DATA PESERTA</button>
+    <button data-tab="riwayat">RIWAYAT DATA</button>
+    <button data-tab="atur">PENGATURAN</button>
+    <a class="btn btn-ghost" id="liveLink" target="_blank" rel="noopener">Buka Live Score ↗</a>
+  </nav>
+  <main class="dw-main">
+
+    <!-- ================= MONITOR ================= -->
+    <section class="pane" id="pane-monitor">
+      <div class="card" id="pickCard">
+        <h2>PILIH PESERTA BERIKUTNYA</h2>
+        <div class="pick">
+          <label class="field"><span>Peserta (status "Akan")</span><select id="pickSel"></select></label>
+          <button class="btn btn-primary" id="pickBtn">Tampilkan di Arena</button>
+        </div>
+        <p class="muted" id="pickNone" hidden>Tidak ada peserta berstatus "Akan". Tambahkan di menu Data Peserta.</p>
+      </div>
+      <div class="card">
+        <div class="dsm-top">
+          <div class="dsm-info">
+            <div class="kat" id="mKat">KATEGORI SENI</div>
+            <div class="timer" id="mTimer">00:00</div><small id="mLimit"></small>
+            <div class="nm" id="mNama">—</div><div class="kt" id="mKont"></div>
+            <div class="status" id="mStatus" style="margin-top:8px"></div>
+          </div>
+          <div class="dsm-ctl">
+            <button class="btn btn-primary big" id="mainBtn">MULAI / JEDA</button>
+            <button class="btn btn-ghost" id="resetBtn">Reset Penampilan</button>
+            <button class="btn btn-ghost" id="lepasBtn">Lepas Peserta</button>
+          </div>
+          <div class="jboxes" id="jBoxes"></div>
+        </div>
+      </div>
+      <div class="d-panels" id="mComps"></div>
+      <div class="d-total"><span>TOTAL KESELURUHAN</span><b id="mTotal">0</b><small id="mPen" class="muted"></small><button class="btn btn-primary big" id="kirimBtn">KIRIM</button></div>
+      <p class="muted" id="kirimHint" style="margin-top:8px"></p>
+    </section>
+
+    <!-- ================= DATA PESERTA ================= -->
+    <section class="pane" id="pane-data" hidden>
+      <div class="card">
+        <h2>INPUT DATA</h2>
+        <form id="addForm" novalidate>
+          <div class="grid">
+            <label class="field"><span>Nama *</span><input id="a-nama" required></label>
+            <label class="field"><span>Kontingen *</span><input id="a-kont" required></label>
+            <label class="field"><span>Kategori *</span><input id="a-kat" list="dl-kat" required></label>
+            <label class="field"><span>Timer — penanda batas waktu (menit; 0 = tanpa)</span><input id="a-timer" type="number" min="0" step="0.1" value="3"></label>
+          </div>
+          <ul class="err-list" id="addErr" hidden></ul>
+          <div class="actions"><button class="btn btn-primary" type="submit">SIMPAN DATA</button></div>
+        </form>
+      </div>
+      <div class="card">
+        <h2>UBAH DATA</h2>
+        <div class="two-col">
+          <form id="editForm" novalidate>
+            <label class="field"><span>Pilih peserta yang diubah</span><select id="e-pick"></select></label>
+            <div class="grid" style="margin-top:12px">
+              <label class="field"><span>Nama *</span><input id="e-nama"></label>
+              <label class="field"><span>Kontingen *</span><input id="e-kont"></label>
+              <label class="field"><span>Kategori *</span><input id="e-kat" list="dl-kat"></label>
+              <label class="field"><span>Timer — penanda batas (menit)</span><input id="e-timer" type="number" min="0" step="0.1"></label>
+            </div>
+            <ul class="err-list" id="editErr" hidden></ul>
+            <div class="actions"><button class="btn btn-danger" type="button" id="e-del">Hapus Peserta</button><button class="btn btn-primary" type="submit">SIMPAN PERUBAHAN</button></div>
+          </form>
+          <div>
+            <label class="field"><span>Input keseluruhan data — satu baris satu peserta: nama ; kontingen ; kategori ; timer(menit)</span>
+              <textarea id="b-text" rows="8" placeholder="Muhammad Iqbal ; Tapak Suci Banda Aceh ; Seni Tunggal Putra ; 3"></textarea></label>
+            <ul class="err-list" id="bulkErr" hidden></ul>
+            <div class="actions"><button class="btn btn-primary" type="button" id="b-go">Impor Semua Data</button></div>
+          </div>
+        </div>
+      </div>
+      <datalist id="dl-kat"><option>Seni Tunggal Putra</option><option>Seni Tunggal Putri</option><option>Seni Ganda Putra</option><option>Seni Ganda Putri</option><option>Seni Regu Putra</option><option>Seni Regu Putri</option></datalist>
+    </section>
+
+    <!-- ================= RIWAYAT ================= -->
+    <section class="pane" id="pane-riwayat" hidden>
+      <div class="hist-grid">
+        <div>
+          <div class="card">
+            <h2>DATA RIWAYAT</h2>
+            <div class="filters" id="filters">
+              <button class="btn active" data-f="semua">SEMUA</button><button class="btn" data-f="sudah">SUDAH</button><button class="btn" data-f="akan">AKAN</button>
+            </div>
+            <div style="overflow-x:auto"><div id="histTable"></div></div>
+          </div>
+          <div class="card"><h2>LOG AKTIVITAS (AUDIT)</h2><div id="auditList"></div></div>
+        </div>
+        <div class="stat-stack">
+          <div class="stat">data keseluruhan<b id="stAll">0</b>peserta</div>
+          <div class="stat">akan<b id="stAkan">0</b>peserta</div>
+          <div class="stat">sudah<b id="stSudah">0</b>peserta</div>
+        </div>
+      </div>
+    </section>
+    <!-- ================= PENGATURAN ================= -->
+    <section class="pane" id="pane-atur" hidden>
+      <div class="card">
+        <h2>PENGURANGAN NILAI BERDASARKAN WAKTU</h2>
+        <p class="muted">Timer seni menghitung maju dan tidak berhenti otomatis. Tiap baris berarti: <b>jika waktu penampilan ≥ menit:detik, total dikurangi sebesar nilai tertentu</b>. Pengurangan adalah total pada ambang itu (tidak dijumlahkan); baris terbesar yang terpenuhi dipakai. Berlaku untuk kedua arena seni.</p>
+        <div id="penRows"></div>
+        <ul class="err-list" id="penErr" hidden></ul>
+        <div class="actions"><button class="btn btn-ghost" id="penAdd" type="button">+ Tambah Baris</button><button class="btn btn-primary" id="penSave" type="button">SIMPAN PENGATURAN</button></div>
+      </div>
+    </section>
+  </main>
+</div>
+<script src="js/seni-data.js"></script><script src="js/auth-demo.js"></script><script src="js/app.js"></script><script src="js/seni-dewan.js"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Loting Pertandingan — ATSC IV</title>
+<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/forms.css"><link rel="stylesheet" href="css/bagan.css">
+<link rel="stylesheet" href="css/theme.css">
+</head>
+<body class="loting-page">
+<header class="topbar">
+  <!-- LOGO TPS (opsional): assets/logos/logo-tps.png -->
+  <span class="logo-slot" data-label="TPS"><img src="assets/logos/logo-tps.png" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>
+  <strong class="lot-title">LOOTING PERTANDINGAN</strong>
+  <div class="tb-title" style="margin-left:auto;text-align:right"><strong>AR-RANIRY TAPAK SUCI CHAMPIONSHIP IV</strong><span>TINGKAT PROVINSI ACEH</span></div>
+  <button class="btn btn-ghost" id="btnExit">KELUAR</button>
+</header>
+<main class="lot-wrap">
+  <section class="card">
+    <div class="lot-head"><h2>DATA PESERTA</h2><button class="btn btn-primary big" id="mulaiBtn">MULAI LOOTING</button></div>
+    <div class="lot-bar">
+      <label class="field grow"><span>KELAS</span><input id="lotKelas" list="dl-kelas" placeholder="Pilih atau ketik kelas, mis. Kelas B (50–55 kg)" autocomplete="off"></label>
+      <div class="kat-btns" id="katBtns"><button class="btn active" data-k="Putra">PUTRA</button><button class="btn" data-k="Putri">PUTRI</button><button class="btn" data-k="Usia Dini">USIA DINI</button></div>
+      <div class="lot-act"><button class="btn btn-ghost" id="acakBtn">acak ulang</button><button class="btn btn-primary" id="simpanBtn">simpan hasil</button></div>
+    </div>
+    <div class="lot-cfg"><span class="muted">Untuk partai hasil loting:</span>
+      <label>Babak <select id="lotBabak"><option>1</option><option selected>2</option><option>3</option></select></label>
+      <label>Timer/babak (menit) <input id="lotDur" type="number" min="0.1" step="0.1" value="2"></label>
+      <label>Tambahan (menit; 0 = tidak ada) <input id="lotTam" type="number" min="0" step="0.1" value="1"></label></div>
+    <p class="notice" id="lotNote" hidden></p>
+    <datalist id="dl-kelas"></datalist>
+    <div class="lot-boxes" id="lotBoxes"></div>
+  </section>
+  <section class="card"><h2>BAGAN <small id="bagTitle" class="muted"></small></h2><div class="zoom-bar" data-zoom-target="bagan"><span class="muted">Perbesar/perkecil bagan:</span><button type="button" class="btn btn-ghost" data-z="out" aria-label="Perkecil">−</button><span class="zv">100%</span><button type="button" class="btn btn-ghost" data-z="in" aria-label="Perbesar">+</button><button type="button" class="btn btn-ghost" data-z="fit">Muat layar</button><button type="button" class="btn btn-ghost" data-z="reset">100%</button></div>
+        <div id="bagan"></div>
+    <p class="muted">Setelah "simpan hasil", partai babak pertama otomatis masuk ke <b>Data Fighter</b> dan bagan tampil di menu <b>Bagan Fighter</b> pada Dewan. Pemenang tiap partai otomatis maju ke babak berikutnya.</p></section>
+  <details class="card"><summary><b>Tambah / Impor Peserta</b></summary>
+    <div class="two-col" style="margin-top:12px">
+      <form id="pForm" novalidate>
+        <div class="grid">
+          <label class="field"><span>Nama *</span><input id="p-nama"></label><label class="field"><span>Kontingen *</span><input id="p-kont"></label>
+          <label class="field"><span>Kategori *</span><select id="p-kat"><option>Putra</option><option>Putri</option><option>Usia Dini</option></select></label>
+          <label class="field"><span>Kelas *</span><input id="p-kelas" list="dl-kelas"></label>
+        </div>
+        <ul class="err-list" id="pErr" hidden></ul>
+        <div class="actions"><button class="btn btn-primary" type="submit">Simpan Peserta</button></div>
+      </form>
+      <div>
+        <label class="field"><span>Impor banyak — satu baris satu peserta: nama ; kontingen ; kategori ; kelas</span>
+          <textarea id="b-text" rows="6" placeholder="Dimas Pratama ; Tapak Suci Banda Aceh ; Putra ; Kelas B (50–55 kg)"></textarea></label>
+        <ul class="err-list" id="bErr" hidden></ul>
+        <div class="actions"><button class="btn btn-primary" type="button" id="b-go">Impor Semua Data</button></div>
+      </div>
+    </div></details>
+</main>
+<script src="js/arena-data.js"></script><script src="js/auth-demo.js"></script><script src="js/app.js"></script><script src="js/bagan.js"></script><script src="js/fight-list.js"></script><script src="js/loting.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+/* =====================================================================
+   style.css — dasar visual bersama (palet, latar, topbar, tombol, dialog)
+   ---------------------------------------------------------------------
+   GANTI WARNA di :root. GAMBAR LATAR MASKOT: taruh file di
+   assets/backgrounds/mascot.png (PNG transparan disarankan).
+   Bila file tidak ada, latar cadangan CSS tetap tampil.
+   ===================================================================== */
+:root {
+  --ink: #05080f; --navy: #0a1226; --navy-2: #121e3f; --gold: #d4a72c; --gold-2: #f3d27a;
+  --red: #d62839; --red-d: #8f1422; --blue: #1f5fd6; --blue-d: #123d8f;
+  --text: #eef1f8; --muted: #9aa6c2; --ok: #2fb36b; --warn: #e6a700; --line: rgba(212, 167, 44, .38);
+  --radius: 16px;
+  --font: "Segoe UI", "Helvetica Neue", Roboto, system-ui, sans-serif;
+  --font-num: "Bahnschrift", "Arial Narrow", "Segoe UI", system-ui, sans-serif;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { min-height: 100%; }
+body {
+  margin: 0; min-height: 100vh; font-family: var(--font); color: var(--text); background-color: var(--ink);
+  background-image:
+    linear-gradient(160deg, rgba(10, 18, 38, .92), rgba(5, 8, 15, .96)),
+    repeating-linear-gradient(135deg, rgba(212, 167, 44, .05) 0 2px, transparent 2px 26px);
+  background-attachment: fixed;
+}
+/* Latar cadangan (cincin emas samar) — muncul walau gambar tidak ada */
+body::before {
+  content: ""; position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background:
+    radial-gradient(circle at 88% 92%, transparent 0 26vmin, rgba(212, 167, 44, .09) 26vmin 26.4vmin, transparent 26.6vmin 32vmin, rgba(212, 167, 44, .05) 32vmin 32.3vmin, transparent 32.5vmin),
+    radial-gradient(circle at 8% 6%, rgba(31, 95, 214, .14), transparent 38vmin),
+    radial-gradient(circle at 92% 8%, rgba(214, 40, 57, .12), transparent 34vmin);
+}
+/* MASKOT LATAR: assets/backgrounds/mascot.png */
+body::after {
+  content: ""; position: fixed; right: -3vw; bottom: -2vh; width: min(62vw, 680px); height: 86vh; z-index: 0; pointer-events: none;
+  background: url("../assets/backgrounds/mascot.png") no-repeat right bottom / contain; opacity: .16;
+}
+body > * { position: relative; z-index: 1; }
+a { color: var(--gold-2); }
+:focus-visible { outline: 3px solid var(--gold-2); outline-offset: 2px; }
+.muted { color: var(--muted); }
+.err { color: #ff8a95; margin: 6px 0; font-weight: 600; }
+.notice { background: rgba(230, 167, 0, .14); border: 1px solid var(--warn); border-radius: 10px; padding: 10px 14px; margin: 10px 0; }
+
+/* Slot logo: CSS cadangan + <img> opsional (assets/logos/*.png) */
+.logo-slot { position: relative; display: inline-grid; place-items: center; width: 60px; height: 60px; flex: none; border-radius: 50%;
+  border: 2px dashed var(--line); color: var(--gold); font: 700 1.2rem var(--font-num); background: rgba(10, 18, 38, .5); }
+.logo-slot::before { content: attr(data-label); }
+.logo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.logo-slot.has-img { border-color: transparent; background: none; }
+.logo-slot.has-img::before { display: none; }
+.logo-slot.big { width: 84px; height: 84px; }
+
+.topbar { display: flex; align-items: center; gap: 14px; padding: 10px 18px; background: rgba(10, 18, 38, .92); border-bottom: 2px solid var(--gold); }
+.topbar .logo-slot { width: 46px; height: 46px; font-size: 1rem; }
+.tb-title { display: flex; flex-direction: column; line-height: 1.2; }
+.tb-title strong { font-family: var(--font-num); letter-spacing: .02em; }
+.tb-title span { color: var(--muted); font-size: .85rem; }
+.tb-right { margin-left: auto; display: flex; align-items: center; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+.tb-role { font-family: var(--font-num); font-size: 1.1rem; color: var(--gold-2); }
+.tb-user { color: var(--muted); font-size: .9rem; }
+.badge { display: inline-block; padding: 3px 10px; border-radius: 99px; border: 1px solid var(--gold); color: var(--gold-2); font-size: .85rem; font-weight: 600; }
+.badge[data-ok="1"] { border-color: var(--ok); color: #7fe3ae; background: rgba(47, 179, 107, .12); }
+.badge[data-ok="0"] { border-color: var(--warn); color: #ffd36b; }
+
+.btn { font: 600 .95rem var(--font); cursor: pointer; border-radius: 10px; padding: 9px 16px; border: 2px solid var(--gold); background: transparent; color: var(--gold-2); text-decoration: none; display: inline-block; text-align: center; }
+.btn:hover:not(:disabled) { background: rgba(212, 167, 44, .16); }
+.btn-primary { background: var(--gold); color: #1a1405; }
+.btn-primary:hover:not(:disabled) { background: var(--gold-2); }
+.btn-danger { border-color: var(--red); color: #ff9aa4; }
+.btn-danger:hover:not(:disabled) { background: rgba(214, 40, 57, .18); }
+.btn-ghost { border-color: var(--line); color: var(--text); }
+.btn.big { padding: 14px 22px; font-size: 1.1rem; }
+.btn:disabled { opacity: .4; cursor: not-allowed; }
+
+.timer { font-family: var(--font-num); font-weight: 800; font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+.chip { display: inline-block; padding: 5px 16px; border: 2px solid var(--line); border-radius: 10px; font-weight: 700; }
+.status { font-weight: 700; text-align: center; padding: 6px 12px; border-radius: 8px; background: rgba(154, 166, 194, .16); }
+.status[data-st="berlangsung"] { background: rgba(47, 179, 107, .22); color: #8cf0b9; }
+.status[data-st="dijeda"], .status[data-st="waktu-habis"] { background: rgba(230, 167, 0, .22); color: #ffd36b; }
+.status[data-st="selesai"], .status[data-st="final"] { background: rgba(212, 167, 44, .25); color: var(--gold-2); }
+
+#toasts { position: fixed; top: 14px; right: 14px; z-index: 99; display: grid; gap: 8px; max-width: min(92vw, 360px); }
+.toast { background: var(--navy-2); border-left: 5px solid var(--gold); padding: 10px 14px; border-radius: 8px; box-shadow: 0 6px 20px rgba(0, 0, 0, .5); }
+.toast.ok { border-color: var(--ok); } .toast.err { border-color: var(--red); }
+.modal-ov { position: fixed; inset: 0; z-index: 90; background: rgba(0, 0, 0, .7); display: grid; place-items: center; padding: 16px; }
+.modal { background: var(--navy-2); border: 2px solid var(--gold); border-radius: var(--radius); padding: 22px; width: min(480px, 100%); }
+.modal h3 { margin: 0 0 10px; color: var(--gold-2); }
+.modal-act { display: flex; justify-content: flex-end; gap: 10px; margin-top: 16px; }
+.official { background: rgba(212, 167, 44, .12); border: 1px solid var(--line); border-radius: 10px; padding: 10px 12px; }
+.site-foot { text-align: center; color: var(--muted); border-top: 1px solid var(--line); padding: 14px; margin-top: 24px; }
+@media (max-width: 640px) { .topbar { padding: 8px 10px; } .tb-title strong { font-size: .8rem; } }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; } }
+[hidden] { display: none !important; }
