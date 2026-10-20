@@ -3,36 +3,45 @@
    ticker (tanpa interval ganda), logo placeholder.
    ===================================================================== */
 const UI = (() => {
-  'use strict';
-  const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
-  const $ = id => document.getElementById(id);
-  const arenaParam = () => { const n = parseInt(new URLSearchParams(location.search).get('arena'), 10); return n === 1 || n === 2 ? n : null; };
-  const modeParam = () => (new URLSearchParams(location.search).get('mode') === 'seni' ? 'seni' : 'fight');
-  const fmtTime = ts => ts ? new Date(ts).toLocaleTimeString('id-ID', { hour12: false }) : '—';
-  const fmtDateTime = ts => ts ? new Date(ts).toLocaleString('id-ID', { hour12: false }) : '—';
-  const setText = (el, t) => { if (el && el.textContent !== String(t)) el.textContent = t; };
-  /* angka yang berubah "membal" sebentar (animasi) */
-  const setNum = (el, t) => { if (el && el.textContent !== String(t)) { el.textContent = t; el.classList.remove('bump'); void el.offsetWidth; el.classList.add('bump'); } };
-  const setHTML = (el, h) => { if (el && el._h !== h) { el._h = h; el.innerHTML = h; } };
+            'use strict';
+            const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+            const $ = id => document.getElementById(id);
+            const arenaParam = () => { const n = parseInt(new URLSearchParams(location.search).get('arena'), 10); return n === 1 || n === 2 ? n : null; };
+            const modeParam = () => (new URLSearchParams(location.search).get('mode') === 'seni' ? 'seni' : 'fight');
+            const fmtTime = ts => ts ? new Date(ts).toLocaleTimeString('id-ID', { hour12: false }) : '—';
+            const fmtDateTime = ts => ts ? new Date(ts).toLocaleString('id-ID', { hour12: false }) : '—';
+            const setText = (el, t) => { if (el && el.textContent !== String(t)) el.textContent = t; };
+            /* angka yang berubah "membal" sebentar (animasi) */
+            const setNum = (el, t) => { if (el && el.textContent !== String(t)) { el.textContent = t;
+                    el.classList.remove('bump');
+                    void el.offsetWidth;
+                    el.classList.add('bump'); } };
+            const setHTML = (el, h) => { if (el && el._h !== h) { el._h = h;
+                    el.innerHTML = h; } };
 
-  /* Slot logo: gambar di assets/logos/. Jika file tidak ada, slot memakai teks cadangan CSS. */
-  const logoSlot = (file, label) =>
-    `<span class="logo-slot" data-label="${label}"><img src="assets/logos/${file}" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>`;
+            /* Slot logo: gambar di assets/logos/. Jika file tidak ada, slot memakai teks cadangan CSS. */
+            const logoSlot = (file, label) =>
+                `<span class="logo-slot" data-label="${label}"><img src="assets/logos/${file}" alt="" onload="this.parentNode.classList.add('has-img')" onerror="this.remove()"></span>`;
 
-  function toast(msg, type) {
-    let box = $('toasts');
-    if (!box) { box = document.createElement('div'); box.id = 'toasts'; box.setAttribute('aria-live', 'polite'); document.body.appendChild(box); }
-    const t = document.createElement('div');
-    t.className = 'toast ' + (type || 'info'); t.textContent = msg; box.appendChild(t);
-    setTimeout(() => t.remove(), 4200);
-  }
+            function toast(msg, type) {
+                let box = $('toasts');
+                if (!box) { box = document.createElement('div');
+                    box.id = 'toasts';
+                    box.setAttribute('aria-live', 'polite');
+                    document.body.appendChild(box); }
+                const t = document.createElement('div');
+                t.className = 'toast ' + (type || 'info');
+                t.textContent = msg;
+                box.appendChild(t);
+                setTimeout(() => t.remove(), 4200);
+            }
 
-  /* Dialog konfirmasi. opts: {title, html, okText, reason:{label, required}} -> Promise<{ok, reason}> */
-  function confirmDialog(opts) {
-    return new Promise(resolve => {
-      const ov = document.createElement('div');
-      ov.className = 'modal-ov';
-      ov.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mdT">
+            /* Dialog konfirmasi. opts: {title, html, okText, reason:{label, required}} -> Promise<{ok, reason}> */
+            function confirmDialog(opts) {
+                return new Promise(resolve => {
+                            const ov = document.createElement('div');
+                            ov.className = 'modal-ov';
+                            ov.innerHTML = `<div class="modal" role="dialog" aria-modal="true" aria-labelledby="mdT">
         <h3 id="mdT">${esc(opts.title)}</h3><div class="modal-body">${opts.html || ''}</div>
         ${opts.reason ? `<label class="field"><span>${esc(opts.reason.label)}</span><textarea id="mdR" rows="2"></textarea></label><p class="err" id="mdE" hidden></p>` : ''}
         <div class="modal-act"><button class="btn btn-ghost" data-r="0">Batal</button><button class="btn btn-primary" data-r="1">${esc(opts.okText || 'Ya, lanjutkan')}</button></div></div>`;
@@ -83,8 +92,11 @@ const UI = (() => {
         const a = SENI.getArena(n), st = SENI.effStatus(a);
         el.textContent = a.match ? `Peserta ${a.match.nomor} · ${SENI.STATUS[st]}` : SENI.STATUS.kosong; el.dataset.st = st; return;
       }
-      const a = ATSC.getArena(n), st = ATSC.effStatus(a);
-      el.textContent = a.match ? `Partai ${a.match.nomor} · ${ATSC.STATUS[st]}` : ATSC.STATUS.kosong; el.dataset.st = st;
+     if (typeof ATSC !== 'undefined') {
+        const a = ATSC.getArena(n), st = ATSC.effStatus(a);
+        el.textContent = a.match ? `Partai ${a.match.nomor} - ${ATSC.STATUS[st]}` : ATSC.STATUS.kosong; 
+        el.dataset.st = st;
+    }
     });
   }
   if (document.querySelector('[data-arena-chip]')) setInterval(homeChips, 1000), homeChips();
