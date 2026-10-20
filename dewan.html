@@ -1,120 +1,159 @@
 <!DOCTYPE html>
 <html lang="id">
+
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Dewan Pertandingan — ATSC IV</title>
-<link rel="stylesheet" href="css/style.css"><link rel="stylesheet" href="css/forms.css"><link rel="stylesheet" href="css/seni.css"><link rel="stylesheet" href="css/bagan.css">
-<link rel="stylesheet" href="css/theme.css">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dewan Pertandingan — ATSC IV</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/forms.css">
+    <link rel="stylesheet" href="css/seni.css">
+    <link rel="stylesheet" href="css/bagan.css">
+    <link rel="stylesheet" href="css/theme.css">
 </head>
+
 <body class="dewan-page">
-<header id="topbar" class="topbar"></header>
-<div class="dw-layout">
-  <nav class="dw-nav" aria-label="Menu Dewan">
-    <button data-tab="monitor" class="active">MONITOR</button>
-    <button data-tab="data">DATA FIGHTER</button>
-    <button data-tab="riwayat">DATA RIWAYAT</button>
-    <button data-tab="bagan">BAGAN FIGHTER</button>
-    <a class="btn btn-ghost" id="liveLink" target="_blank" rel="noopener">Buka Live Score ↗</a>
-  </nav>
-  <main class="dw-main">
-    <datalist id="dl-kat"><option>Putra</option><option>Putri</option><option>Usia Dini</option></datalist><datalist id="dl-kelas"></datalist>
+    <header id="topbar" class="topbar"></header>
+    <div class="dw-layout">
+        <nav class="dw-nav" aria-label="Menu Dewan">
+            <button data-tab="monitor" class="active">MONITOR</button>
+            <button data-tab="data">DATA FIGHTER</button>
+            <button data-tab="riwayat">DATA RIWAYAT</button>
+            <button data-tab="bagan">BAGAN FIGHTER</button>
+            <a class="btn btn-ghost" id="liveLink" target="_blank" rel="noopener">Buka Live Score ↗</a>
+        </nav>
+        <main class="dw-main">
+            <datalist id="dl-kat"><option>Putra</option><option>Putri</option><option>Usia Dini</option></datalist><datalist id="dl-kelas"></datalist>
 
-    <!-- ================= MONITOR ================= -->
-    <section class="pane" id="pane-monitor">
-      <div class="card" id="pickCard">
-        <h2>PILIH PARTAI BERIKUTNYA</h2>
-        <div class="pick">
-          <label class="field"><span>Partai (status "Akan bertanding")</span><select id="pickSel"></select></label>
-          <button class="btn btn-primary" id="pickBtn">Tampilkan di Arena</button>
-        </div>
-        <p class="muted" id="pickNone" hidden>Tidak ada partai "Akan bertanding". Tambahkan di Data Fighter atau buat bagan lewat Loting.</p>
-      </div>
-      <div class="mon-top">
-        <div class="card mon-card">
-          <h2>MONITOR PERTANDINGAN <small id="mPartai"></small></h2>
-          <p class="notice" id="monNotice" hidden>Belum ada partai. Pilih partai di atas atau isi di menu Data Fighter.</p>
-          <div class="mon-row">
-            <div class="mon-side red"><small>PESILAT MERAH</small><b id="mRedName">—</b><span id="mRedKont"></span><div class="num" id="mRedScore">0</div></div>
-            <div class="mon-mid"><span class="chip" id="mBabak">BABAK</span><div class="timer" id="mTimer">00:00</div><div class="status" id="mStatus"></div></div>
-            <div class="mon-side blue"><small>PESILAT BIRU</small><b id="mBlueName">—</b><span id="mBlueKont"></span><div class="num" id="mBlueScore">0</div></div>
-          </div>
-        </div>
-        <div class="card ctrl-card">
-          <button class="btn btn-primary big" id="mainBtn">MULAI / JEDA</button>
-          <div class="round-list" id="roundList"></div>
-          <button class="btn btn-danger" id="endBtn">Akhiri Pertandingan</button>
-          <button class="btn btn-ghost" id="resetBtn">Reset Pertandingan</button>
-          <button class="btn btn-ghost" id="lepasBtn">Lepas Partai</button>
-        </div>
-      </div>
-      <div class="judge-cards" id="judgeCards"></div>
-      <div class="card" style="margin-top:16px">
-        <h2>TETAPKAN PEMENANG</h2>
-        <div id="wInfo"></div><p class="notice" id="wNote" hidden></p>
-        <fieldset id="wFields">
-          <div class="radios">
-            <label><input type="radio" name="hasil" value="red"> Pemenang Sudut Merah</label>
-            <label><input type="radio" name="hasil" value="blue"> Pemenang Sudut Biru</label>
-            <label><input type="radio" name="hasil" value="seri"> Seri / belum ada pemenang</label>
-          </div>
-          <div class="grid">
-            <label class="field"><span>Dasar Keputusan *</span><select id="wBasis"><option value="">— pilih —</option><option>Angka</option><option>Keputusan Dewan</option><option>Diskualifikasi lawan</option><option>Lainnya (jelaskan di catatan)</option></select></label>
-            <label class="field"><span>Dewan yang menetapkan</span><input id="wBy" disabled></label>
-          </div>
-          <label class="field"><span>Catatan (opsional; wajib untuk hasil seri)</span><textarea id="wNotes" rows="2"></textarea></label>
-        </fieldset>
-        <div class="actions"><button class="btn btn-ghost" id="wCorrect" hidden>Koreksi Hasil</button><button class="btn btn-primary" id="wConfirm">TETAPKAN PEMENANG</button></div>
-      </div>
-    </section>
+            <!-- ================= MONITOR ================= -->
+            <section class="pane" id="pane-monitor">
+                <div class="card" id="pickCard">
+                    <h2>PILIH PARTAI BERIKUTNYA</h2>
+                    <div class="pick">
+                        <label class="field"><span>Partai (status "Akan bertanding")</span><select id="pickSel"></select></label>
+                        <button class="btn btn-primary" id="pickBtn">Tampilkan di Arena</button>
+                    </div>
+                    <p class="muted" id="pickNone" hidden>Tidak ada partai "Akan bertanding". Tambahkan di Data Fighter atau buat bagan lewat Loting.</p>
+                </div>
+                <div class="mon-top">
+                    <div class="card mon-card">
+                        <h2>MONITOR PERTANDINGAN <small id="mPartai"></small></h2>
+                        <p class="notice" id="monNotice" hidden>Belum ada partai. Pilih partai di atas atau isi di menu Data Fighter.</p>
+                        <div class="mon-row">
+                            <div class="mon-side red"><small>PESILAT MERAH</small><b id="mRedName">—</b><span id="mRedKont"></span>
+                                <div class="num" id="mRedScore">0</div>
+                            </div>
+                            <div class="mon-mid"><span class="chip" id="mBabak">BABAK</span>
+                                <div class="timer" id="mTimer">00:00</div>
+                                <div class="status" id="mStatus"></div>
+                            </div>
+                            <div class="mon-side blue"><small>PESILAT BIRU</small><b id="mBlueName">—</b><span id="mBlueKont"></span>
+                                <div class="num" id="mBlueScore">0</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card ctrl-card">
+                        <button class="btn btn-primary big" id="mainBtn">MULAI / JEDA</button>
+                        <div class="round-list" id="roundList"></div>
+                        <button class="btn btn-danger" id="endBtn">Akhiri Pertandingan</button>
+                        <button class="btn btn-ghost" id="resetBtn">Reset Pertandingan</button>
+                        <button class="btn btn-ghost" id="lepasBtn">Lepas Partai</button>
+                    </div>
+                </div>
+                <div class="judge-cards" id="judgeCards"></div>
+                <div class="card" style="margin-top:16px">
+                    <h2>TETAPKAN PEMENANG</h2>
+                    <div id="wInfo"></div>
+                    <p class="notice" id="wNote" hidden></p>
+                    <fieldset id="wFields">
+                        <div class="radios">
+                            <label><input type="radio" name="hasil" value="red"> Pemenang Sudut Merah</label>
+                            <label><input type="radio" name="hasil" value="blue"> Pemenang Sudut Biru</label>
+                            <label><input type="radio" name="hasil" value="seri"> Seri / belum ada pemenang</label>
+                        </div>
+                        <div class="grid">
+                            <label class="field"><span>Dasar Keputusan *</span><select id="wBasis"><option value="">— pilih —</option><option>Angka</option><option>Keputusan Dewan</option><option>Diskualifikasi lawan</option><option>Lainnya (jelaskan di catatan)</option></select></label>
+                            <label class="field"><span>Dewan yang menetapkan</span><input id="wBy" disabled></label>
+                        </div>
+                        <label class="field"><span>Catatan (opsional; wajib untuk hasil seri)</span><textarea id="wNotes" rows="2"></textarea></label>
+                    </fieldset>
+                    <div class="actions"><button class="btn btn-ghost" id="wCorrect" hidden>Koreksi Hasil</button><button class="btn btn-primary" id="wConfirm">TETAPKAN PEMENANG</button></div>
+                </div>
+            </section>
 
-    <!-- ================= DATA FIGHTER ================= -->
-    <section class="pane" id="pane-data" hidden>
-      <div class="card">
-        <h2>INPUT DATA</h2>
-        <form id="addForm" novalidate><div id="addFields"></div><ul class="err-list" id="addErr" hidden></ul>
-          <div class="actions"><button class="btn btn-primary" type="submit">SIMPAN DATA</button></div></form>
-      </div>
-      <div class="card">
-        <h2>DATA YANG AKAN BERTANDING</h2>
-        <form id="editForm" novalidate>
-          <label class="field"><span>Pilih partai yang diubah</span><select id="e-pick"></select></label>
-          <div id="editFields" style="margin-top:12px"></div>
-          <p class="muted" id="editNote" hidden>Partai hasil bagan: hanya nomor partai, babak, dan timer yang dapat diubah (peserta diatur lewat Loting).</p>
-          <ul class="err-list" id="editErr" hidden></ul>
-          <div class="actions"><button class="btn btn-danger" type="button" id="e-del">Hapus Partai</button><button class="btn btn-primary" type="submit">SIMPAN PERUBAHAN</button></div>
-        </form>
-      </div>
-    </section>
+            <!-- ================= DATA FIGHTER ================= -->
+            <section class="pane" id="pane-data" hidden>
+                <div class="card">
+                    <h2>INPUT DATA</h2>
+                    <form id="addForm" novalidate>
+                        <div id="addFields"></div>
+                        <ul class="err-list" id="addErr" hidden></ul>
+                        <div class="actions"><button class="btn btn-primary" type="submit">SIMPAN DATA</button></div>
+                    </form>
+                </div>
+                <div class="card">
+                    <h2>DATA YANG AKAN BERTANDING</h2>
+                    <form id="editForm" novalidate>
+                        <label class="field"><span>Pilih partai yang diubah</span><select id="e-pick"></select></label>
+                        <div id="editFields" style="margin-top:12px"></div>
+                        <p class="muted" id="editNote" hidden>Partai hasil bagan: hanya nomor partai, babak, dan timer yang dapat diubah (peserta diatur lewat Loting).</p>
+                        <ul class="err-list" id="editErr" hidden></ul>
+                        <div class="actions"><button class="btn btn-danger" type="button" id="e-del">Hapus Partai</button><button class="btn btn-primary" type="submit">SIMPAN PERUBAHAN</button></div>
+                    </form>
+                </div>
+            </section>
 
-    <!-- ================= DATA RIWAYAT ================= -->
-    <section class="pane" id="pane-riwayat" hidden>
-      <div class="hist-grid">
-        <div>
-          <div class="card"><h2>DATA RIWAYAT PERTANDINGAN</h2>
-            <div class="filters" id="filters"><button class="btn active" data-f="semua">SEMUA</button><button class="btn" data-f="sudah">SUDAH BERTANDING</button><button class="btn" data-f="akan">AKAN BERTANDING</button></div>
-            <div style="overflow-x:auto"><div id="histTable"></div></div></div>
-          <div class="card"><h2>LOG AKTIVITAS ARENA INI (AUDIT)</h2><div id="auditList"></div></div>
-        </div>
-        <div class="stat-stack">
-          <div class="stat">data keseluruhan<b id="stAll">0</b>peserta</div>
-          <div class="stat">akan bertanding<b id="stAkan">0</b>peserta</div>
-          <div class="stat">sudah bertanding<b id="stSudah">0</b>peserta</div>
-        </div>
-      </div>
-    </section>
+            <!-- ================= DATA RIWAYAT ================= -->
+            <section class="pane" id="pane-riwayat" hidden>
+                <div class="hist-grid">
+                    <div>
+                        <div class="card">
+                            <h2>DATA RIWAYAT PERTANDINGAN</h2>
+                            <div class="filters" id="filters"><button class="btn active" data-f="semua">SEMUA</button><button class="btn" data-f="sudah">SUDAH BERTANDING</button><button class="btn" data-f="akan">AKAN BERTANDING</button></div>
+                            <div style="overflow-x:auto">
+                                <div id="histTable"></div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <h2>LOG AKTIVITAS ARENA INI (AUDIT)</h2>
+                            <div id="auditList"></div>
+                        </div>
+                    </div>
+                    <div class="stat-stack">
+                        <div class="stat">data keseluruhan<b id="stAll">0</b>peserta</div>
+                        <div class="stat">akan bertanding<b id="stAkan">0</b>peserta</div>
+                        <div class="stat">sudah bertanding<b id="stSudah">0</b>peserta</div>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ================= BAGAN FIGHTER ================= -->
-    <section class="pane" id="pane-bagan" hidden>
-      <div class="card">
-        <h2>BAGAN FIGHTER</h2>
-        <label class="field" style="max-width:420px"><span>Pilih bagan hasil loting</span><select id="bgSel"></select></label>
-        <p class="muted" id="bgNone" hidden>Belum ada bagan. Lakukan loting dan "simpan hasil" di dasbor Loting.</p>
-        <div class="zoom-bar" data-zoom-target="bgView"><span class="muted">Perbesar/perkecil bagan:</span><button type="button" class="btn btn-ghost" data-z="out" aria-label="Perkecil">−</button><span class="zv">100%</span><button type="button" class="btn btn-ghost" data-z="in" aria-label="Perbesar">+</button><button type="button" class="btn btn-ghost" data-z="fit">Muat layar</button><button type="button" class="btn btn-ghost" data-z="reset">100%</button></div>
-        <div id="bgView" style="margin-top:12px"></div>
-      </div>
-    </section>
-  </main>
-</div>
-<script src="js/arena-data.js"></script><script src="js/timer.js"></script><script src="js/auth-demo.js"></script><script src="js/results.js"></script><script src="js/app.js"></script><script src="js/bagan.js"></script><script src="js/fight-list.js"></script><script src="js/dewan.js"></script>
+            <!-- ================= BAGAN FIGHTER ================= -->
+            <section class="pane" id="pane-bagan" hidden>
+                <div class="card">
+                    <h2>BAGAN FIGHTER</h2>
+                    <label class="field" style="max-width:420px"><span>Pilih bagan hasil loting</span><select id="bgSel"></select></label>
+                    <p class="muted" id="bgNone" hidden>Belum ada bagan. Lakukan loting dan "simpan hasil" di dasbor Loting.</p>
+                    <div class="zoom-bar" data-zoom-target="bgView"><span class="muted">Perbesar/perkecil bagan:</span><button type="button" class="btn btn-ghost" data-z="out" aria-label="Perkecil">−</button><span class="zv">100%</span><button type="button" class="btn btn-ghost" data-z="in" aria-label="Perbesar">+</button>
+                        <button
+                            type="button" class="btn btn-ghost" data-z="fit">Muat layar</button><button type="button" class="btn btn-ghost" data-z="reset">100%</button></div>
+                    <div id="bgView" style="margin-top:12px"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+    <script src="js/arena-data.js"></script>
+    <script src="js/timer.js"></script>
+    <script src="js/auth-demo.js"></script>
+    <script src="js/results.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/bagan.js"></script>
+    <script src="js/fight-list.js"></script>
+    <script src="js/dewan.js"></script>
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"; import { getDatabase, ref, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-database.js"; const firebaseConfig = { apiKey: "AIzaSyBV3nu918MZpylFtUtUf8Xp20aAXyvSmW0",
+        authDomain: "ipsi-4fb7a.firebaseapp.com", projectId: "ipsi-4fb7a", storageBucket: "ipsi-4fb7a.firebasestorage.app", messagingSenderId: "137398899161", appId: "1:137398899161:web:0b147283c9f9ec958e09c8", measurementId: "G-NHHDWG7LXN" }; const app
+        = initializeApp(firebaseConfig); const db = getDatabase(app); window.db = db; window.ref = ref; window.set = set; window.update = update; window.onValue = onValue;
+    </script>
 </body>
+
 </html>
