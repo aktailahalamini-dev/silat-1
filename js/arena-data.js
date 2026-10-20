@@ -266,5 +266,4 @@ return {
     mutate,
     resetAll,
     effStatus
-}
-();
+}();
