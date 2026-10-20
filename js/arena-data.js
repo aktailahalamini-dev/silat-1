@@ -246,24 +246,3 @@ const ATSC = (() => {
         effStatus
     };
 })();
-
-return {
-    KEY,
-    RULES,
-    STATUS,
-    clone,
-    emptySide,
-    emptyScores,
-    newArena,
-    buildRounds,
-    audit,
-    createMatch,
-    matchFromEntry,
-    load,
-    save,
-    getArena,
-    update,
-    mutate,
-    resetAll,
-    effStatus
-}();
