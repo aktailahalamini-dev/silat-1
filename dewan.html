@@ -134,8 +134,7 @@
                     <label class="field" style="max-width:420px"><span>Pilih bagan hasil loting</span><select id="bgSel"></select></label>
                     <p class="muted" id="bgNone" hidden>Belum ada bagan. Lakukan loting dan "simpan hasil" di dasbor Loting.</p>
                     <div class="zoom-bar" data-zoom-target="bgView"><span class="muted">Perbesar/perkecil bagan:</span><button type="button" class="btn btn-ghost" data-z="out" aria-label="Perkecil">−</button><span class="zv">100%</span><button type="button" class="btn btn-ghost" data-z="in" aria-label="Perbesar">+</button>
-                        <button
-                            type="button" class="btn btn-ghost" data-z="fit">Muat layar</button><button type="button" class="btn btn-ghost" data-z="reset">100%</button></div>
+                        <button type="button" class="btn btn-ghost" data-z="fit">Muat layar</button><button type="button" class="btn btn-ghost" data-z="reset">100%</button></div>
                     <div id="bgView" style="margin-top:12px"></div>
                 </div>
             </section>
@@ -154,6 +153,13 @@
         authDomain: "ipsi-4fb7a.firebaseapp.com", projectId: "ipsi-4fb7a", storageBucket: "ipsi-4fb7a.firebasestorage.app", messagingSenderId: "137398899161", appId: "1:137398899161:web:0b147283c9f9ec958e09c8", measurementId: "G-NHHDWG7LXN" }; const app
         = initializeApp(firebaseConfig); const db = getDatabase(app); window.db = db; window.ref = ref; window.set = set; window.update = update; window.onValue = onValue;
     </script>
+    <!-- KODE FIREBASE YANG BARU DITEMPEL -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"; import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"; const firebaseConfig = { apiKey: "AIzaSyBV3nu918MZpylFtUtUf8Xp20aAXyvSmW0",
+        authDomain: "ipsi-4fb7a.firebaseapp.com", databaseURL: "https://ipsi-4fb7a-default-rtdb.firebaseio.com", projectId: "ipsi-4fb7a", storageBucket: "ipsi-4fb7a.firebasestorage.app", messagingSenderId: "137398899161", appId: "1:137398899161:web:0b147283c9f9ec958e09c8",
+        measurementId: "G-NHHDWG7LXN" }; const app = initializeApp(firebaseConfig); const db = getDatabase(app); window.db = db; window.ref = ref; window.set = set; window.onValue = onValue;
+    </script>
+    <!-- AKHIR KODE FIREBASE -->
 </body>
 
 </html>
