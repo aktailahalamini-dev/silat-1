@@ -53,7 +53,8 @@
     </script>
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-app.js"; import { getDatabase, ref, set, onValue } from "https://www.gstatic.com/firebasejs/11.0.2/firebase-database.js"; const firebaseConfig = { authDomain: "ipsi-4fb7a.firebaseapp.com",
-        databaseURL: "https://ipsi-4fb7a-default-rtdb.firebaseio.com" }; const app = initializeApp(firebaseConfig); const db = getDatabase(app); window.firebaseDb = db; window.firebaseRef = ref; window.firebaseSet = set; window.firebaseOnValue = onValue;
+        databaseURL: "https://ipsi-4fb7a-default-rtdb.firebaseio.com", projectId: "ipsi-4fb7a", measurementId: "G-NHHDWG7LXN" }; const app = initializeApp(firebaseConfig); const db = getDatabase(app); window.firebaseDb = db; window.firebaseRef = ref;
+        window.firebaseSet = set; window.firebaseOnValue = onValue;
     </script>
 </body>
 
