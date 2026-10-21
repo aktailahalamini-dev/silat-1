@@ -170,9 +170,11 @@ const ATSC = (() => {
         localStorage.setItem(KEY, raw);
         cacheRaw = raw;
         cacheObj = state;
-        if (window.db && window.ref && window.set) {
-            window.set(window.ref(window.db, 'atsc_state'), state).catch(err => console.error("Firebase Sync Error:", err));
 
+        // SINKRONISASI KE FIREBASE (Sesuai HTML Baru)
+        if (window.firebaseDb && window.firebaseRef && window.firebaseSet) {
+            window.firebaseSet(window.firebaseRef(window.firebaseDb, 'atsc_state'), state)
+                .catch(err => console.error("Gagal simpan ke Firebase: ", err));
         }
     }
     const getArena = n => load().arenas[n];
@@ -204,11 +206,11 @@ const ATSC = (() => {
         return st;
     }
 
-    // Menerima update real-time dari Firebase
+    // Menerima update real-time dari Firebase (Sudah Diperbarui)
     if (typeof window !== 'undefined') {
         setTimeout(() => {
-            if (window.db && window.ref && window.onValue) {
-                window.onValue(window.ref(window.db, 'atsc_state'), (snapshot) => {
+            if (window.firebaseDb && window.firebaseRef && window.firebaseOnValue) {
+                window.firebaseOnValue(window.firebaseRef(window.firebaseDb, 'atsc_state'), (snapshot) => {
                     const data = snapshot.val();
                     if (data) {
                         const raw = JSON.stringify(data);
