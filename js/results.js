@@ -41,7 +41,7 @@ const ATSC_RESULTS = (() => {
     const compute = a => ({
         red: computeSide(a, 'red'),
         blue: computeSide(a, 'blue'),
-        submitted: Object.values(a.scores).filter(j => j.submittedAt).length
+        submitted: Object.values(a.scores || {}).filter(j => j && j.submittedAt).length
     });
 
     /* Dewan menetapkan / mengoreksi hasil resmi. data: {winnerSide:'red'|'blue'|null, basis, notes, reason} */
